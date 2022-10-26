@@ -37,10 +37,23 @@ const wrapImage = document.querySelector(".wrap-slider");
 const wrapThumb = document.querySelector(".slider-thumbs");
 const btnNext = document.querySelector(".btn-slide.next");
 const btnPrev = document.querySelector(".btn-slide.prev");
+const btnReverse = document.querySelector(".btn-autoplay.reverse");
+const btnStop = document.querySelector(".btn-autoplay.stop");
 let countIndex = 0;
-
-
 let elImage;
+
+const clock = setInterval(function() {
+  slider("next");
+}, 1500);
+
+btnReverse.addEventListener("click", function() {
+  clearInterval(clock);
+  clock = clock = setInterval(function() {
+    slider("prev");
+  }, 1500);
+
+});
+
 for (let i = 0; i < sliderItems.length; i++) {
   printThumb(sliderItems[i], i);
 }
