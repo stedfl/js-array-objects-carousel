@@ -34,30 +34,18 @@ const btnReverse = document.querySelector(".btn-autoplay.reverse");
 const btnStop = document.querySelector(".btn-autoplay.stop");
 let countIndex = 0;
 let elImage;
-let isPrev = false;
+let direction = "next";
+let sliderOn = false;
 
 let clock = setInterval(function() {
-  slider("next");
+  slider(direction);
+  sliderOn = true;
 }, 1500);
 
-btnReverse.addEventListener("click", function() {
-  if (isPrev) {
-    clearInterval(clock);
-    clock = setInterval(function() {
-      slider("next");
-    }, 1500);
-    isPrev = false;
-  } else {
-    clearInterval(clock);
-    clock = setInterval(function() {
-      slider("prev");
-    }, 1500);
-    isPrev = true;
-  }
-});
-
+btnReverse.addEventListener("click", sliderReverse);
 btnStop.addEventListener("click", function() {
   clearInterval(clock);
+  sliderOn = false;
 })
 
 for (let i in sliderItems) {
@@ -132,4 +120,23 @@ function clickThumb() {
   printImage(sliderItems[this.idElement]);
   addActive(imageList[this.idElement]);
   countIndex = this.idElement;
+  if (sliderOn) {
+    clearInterval(clock);
+    clock = setInterval(function() {
+      slider(direction);
+    }, 1500); 
+  }
+}
+
+function sliderReverse() {
+  if (direction === "next") {
+    direction = "prev";
+  } else {
+    direction = "next";
+  }
+  clearInterval(clock);
+  clock = setInterval(function() {
+    slider(direction);
+    sliderOn = true;
+  }, 1500);
 }
