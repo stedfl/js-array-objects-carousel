@@ -131,4 +131,5 @@ function clickThumb() {
   removeActives(imageList);
   printImage(sliderItems[this.idElement]);
   addActive(imageList[this.idElement]);
+  countIndex = this.idElement;
 }
