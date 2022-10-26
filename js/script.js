@@ -1,10 +1,3 @@
-// **Bonus 1:**
-// Sperimentiamo attraverso l’uso delle timing functions anche una funzionalità di scorrimento al nostro carosello:al click di un bottone o già dall’inizio possiamo far partire, ad intervalli di tempo a piacere, lo scorrimento delle immagini disponibili nel carosello stesso.
-// ****
-// **Bonus 2:**
-// E se volessi un bottone per invertire la “direzione” del carosello?
-// ****
-
 const sliderItems = [
   {
     title: "Svezia",
@@ -41,18 +34,31 @@ const btnReverse = document.querySelector(".btn-autoplay.reverse");
 const btnStop = document.querySelector(".btn-autoplay.stop");
 let countIndex = 0;
 let elImage;
+let isPrev = false;
 
-const clock = setInterval(function() {
+let clock = setInterval(function() {
   slider("next");
 }, 1500);
 
 btnReverse.addEventListener("click", function() {
-  clearInterval(clock);
-  clock = clock = setInterval(function() {
-    slider("prev");
-  }, 1500);
-
+  if (isPrev) {
+    clearInterval(clock);
+    clock = setInterval(function() {
+      slider("next");
+    }, 1500);
+    isPrev = false;
+  } else {
+    clearInterval(clock);
+    clock = setInterval(function() {
+      slider("prev");
+    }, 1500);
+    isPrev = true;
+  }
 });
+
+btnStop.addEventListener("click", function() {
+  clearInterval(clock);
+})
 
 for (let i = 0; i < sliderItems.length; i++) {
   printThumb(sliderItems[i], i);
