@@ -60,7 +60,7 @@ btnStop.addEventListener("click", function() {
   clearInterval(clock);
 })
 
-for (let i = 0; i < sliderItems.length; i++) {
+for (let i in sliderItems) {
   printThumb(sliderItems[i], i);
 }
 
@@ -77,7 +77,7 @@ function printThumb(item, index) {
 }
 
 printImage(sliderItems[countIndex]);
-addClass(imageList[countIndex]);
+addActive(imageList[countIndex]);
 
 btnNext.addEventListener("click", function() {
   slider("next");
@@ -101,7 +101,7 @@ function printImage(item) {
 }
 
 function slider(direction) {
-  removeClass(imageList[countIndex]);
+  removeActives(imageList);
   if (direction === "next") {
     countIndex++;
     if (countIndex >= sliderItems.length) {
@@ -113,22 +113,22 @@ function slider(direction) {
       countIndex = (sliderItems.length - 1);
     }
   }
-  addClass(imageList[countIndex]);
+  addActive(imageList[countIndex]);
   printImage(sliderItems[countIndex]);
 }
 
-function removeClass(item) {
-  item.classList.remove("active");
+function removeActives(items) {
+  for (let i = 0; i < items.length; i++) {
+    items[i].classList.remove("active");
+  }
 }
 
-function addClass(item) {
+function addActive(item) {
   item.classList.add("active");
 }
 
 function clickThumb() {
-  const lastActive = document.getElementsByClassName("active");
-  console.log(lastActive.idElement);
-  // lastActive.classList.remove("active");
+  removeActives(imageList);
   printImage(sliderItems[this.idElement]);
-  addClass(imageList[this.idElement]);
+  addActive(imageList[this.idElement]);
 }
