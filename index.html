@@ -4,10 +4,45 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Carosello Array di Oggetti</title>
 </head>
 <body>
+  <main>
+    <div class="main-wrap">
+      <div class="wrap-slider">
+        <img src="http://www.viaggiareonline.it/wp-content/uploads/2014/11/sweden_148857365.jpg" alt="svezia">
+        <div class="reference">
+          <h2 class="city">Svezia</h2>
+          <p class="description">
+            Stoccolma, la capitale, è una città moderna, anche se vi sono zone che conservano un'atmosfera paesana. 
+          </p>
+        </div>
+  
+      </div>
+      <div class="wrap-thumbs">
+        <div class="slider-thumbs">
+        <img src="http://www.viaggiareonline.it/wp-content/uploads/2014/11/sweden_148857365.jpg" alt="">
+        <img src="https://static1.evcdn.net/images/reduction/1513757_w-1920_h-1080_q-70_m-crop.jpg" alt="">
+        <img src="https://img.itinari.com/pages/images/original/0d3ed180-d22d-48e8-84df-19c4d888b41f-62-crop.jpg?ch=DPR&dpr=2.625&w=1600&s=7ebd4b5a9e045f41b4e0c7c75d298d6c" alt="">
+        <img class="active" src="https://static1.evcdn.net/images/reduction/1583177_w-1920_h-1080_q-70_m-crop.jpg" alt="">
+        <img src="https://cdn.sanity.io/images/24oxpx4s/prod/ed09eff0362396772ad50ec3bfb728d332eb1c30-3200x2125.jpg?w=1600&h=1063&fit=crop" alt="">
+        </div>
+        <button class="btn-slide prev">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="btn-slide next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+      
+    </div>
+    <div class="btn-container">
+      <button class="btn-autoplay reverse">Inverti l'ordine di scorrimento</button>
+      <button class="btn-autoplay stop">Interrompi lo scorrimento</button>
+    </div>
+  </main>
   
   <script src="js/script.js"></script>
 </body>
