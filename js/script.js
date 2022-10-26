@@ -6,7 +6,7 @@ const sliderItems = [
   },
   {
     title: "Perù",
-    description: "Il Perù è un paese pieno di ricchezze. La natura selvaggia si mischia a una cultura millenaria, fatta di storie affascinanti e di leggende che si perdono indietro nel tempo",
+    description: "Il Perù è un paese pieno di ricchezze. La natura selvaggia si mischia a una cultura millenaria, fatta di storie affascinanti e di leggende che si perdono indietro nel tempo.",
     image: "https://static1.evcdn.net/images/reduction/1513757_w-1920_h-1080_q-70_m-crop.jpg"
   },
   {
@@ -16,12 +16,12 @@ const sliderItems = [
   },
   {
     title: "Argentina",
-    description: "L'incredibile varietà della sua geografia e la sua vivace cultura, un mix di radici indigene e influenze europee, danno vita a un paese ricchissimo di spunti, contrasti e grandi passioni",
+    description: "L'incredibile varietà della sua geografia e la sua vivace cultura, un mix di radici indigene e influenze europee, danno vita a un paese ricchissimo di spunti, contrasti e grandi passioni.",
     image: "https://static1.evcdn.net/images/reduction/1583177_w-1920_h-1080_q-70_m-crop.jpg"
   },
   {
     title: "Colombia",
-    description: "Dalle cordigliere al deserto, dal Mar dei Caraibi fino all'Amazzonia, la Colombia è una destinazione eccitante che offre qualcosa per tutti i gusti",
+    description: "Dalle cordigliere al deserto, dal Mar dei Caraibi fino all'Amazzonia, la Colombia è una destinazione eccitante che offre qualcosa per tutti i gusti.",
     image: "https://cdn.sanity.io/images/24oxpx4s/prod/ed09eff0362396772ad50ec3bfb728d332eb1c30-3200x2125.jpg?w=1600&h=1063&fit=crop"
   },
 ];
@@ -36,17 +36,20 @@ let countIndex = 0;
 let elImage;
 let direction = "next";
 let sliderOn = false;
+let clock;
 
-let clock = setInterval(function() {
-  slider(direction);
-  sliderOn = true;
-}, 1500);
+sliderStart();
+
+btnNext.addEventListener("click", function() {
+  slider("next");
+});
+
+btnPrev.addEventListener("click", function() {
+  slider("prev");
+});
 
 btnReverse.addEventListener("click", sliderReverse);
-btnStop.addEventListener("click", function() {
-  clearInterval(clock);
-  sliderOn = false;
-})
+btnStop.addEventListener("click", sliderStop);
 
 for (let i in sliderItems) {
   printThumb(sliderItems[i], i);
@@ -67,14 +70,6 @@ function printThumb(item, index) {
 printImage(sliderItems[countIndex]);
 addActive(imageList[countIndex]);
 
-btnNext.addEventListener("click", function() {
-  slider("next");
-});
-
-btnPrev.addEventListener("click", function() {
-  slider("prev");
-});
-
 function printImage(item) {
   const output = `
   <img src="${item.image}" alt="${item.title}">
@@ -86,6 +81,26 @@ function printImage(item) {
   </div>
   `;
   wrapImage.innerHTML = output;
+}
+
+function removeActives(items) {
+  for (let i = 0; i < items.length; i++) {
+    items[i].classList.remove("active");
+  }
+}
+
+function addActive(item) {
+  item.classList.add("active");
+}
+
+function clickThumb() {
+  removeActives(imageList);
+  printImage(sliderItems[this.idElement]);
+  addActive(imageList[this.idElement]);
+  countIndex = this.idElement;
+  if (sliderOn) {
+     sliderRestart();
+  }
 }
 
 function slider(direction) {
@@ -105,38 +120,24 @@ function slider(direction) {
   printImage(sliderItems[countIndex]);
 }
 
-function removeActives(items) {
-  for (let i = 0; i < items.length; i++) {
-    items[i].classList.remove("active");
-  }
-}
-
-function addActive(item) {
-  item.classList.add("active");
-}
-
-function clickThumb() {
-  removeActives(imageList);
-  printImage(sliderItems[this.idElement]);
-  addActive(imageList[this.idElement]);
-  countIndex = this.idElement;
-  if (sliderOn) {
-    clearInterval(clock);
-    clock = setInterval(function() {
-      slider(direction);
-    }, 1500); 
-  }
-}
-
-function sliderReverse() {
-  if (direction === "next") {
-    direction = "prev";
-  } else {
-    direction = "next";
-  }
-  clearInterval(clock);
+function sliderStart() {
   clock = setInterval(function() {
     slider(direction);
     sliderOn = true;
   }, 1500);
+}
+
+function sliderStop() {
+  clearInterval(clock);
+  sliderOn = false;
+}
+
+function sliderRestart() {
+  sliderStop();
+  sliderStart();
+}
+
+function sliderReverse() {
+  direction = (direction === "next") ? direction = "prev" : direction = "next";
+  sliderRestart();
 }
