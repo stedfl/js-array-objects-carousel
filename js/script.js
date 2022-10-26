@@ -13,15 +13,35 @@
 // E se volessi un bottone per invertire la “direzione” del carosello?
 // ****
 
-/*
+const sliderItems = [
+  {
+    title: "Svezia",
+    description: "Stoccolma, la capitale, è una città moderna, anche se vi sono zone che conservano un'atmosfera paesana.",
+    image: "http://www.viaggiareonline.it/wp-content/uploads/2014/11/sweden_148857365.jpg"
+  },
+  {
+    title: "Perù",
+    description: "Stoccolma, la capitale, è una città moderna, anche se vi sono zone che conservano un'atmosfera paesana.",
+    image: "https://static1.evcdn.net/images/reduction/1513757_w-1920_h-1080_q-70_m-crop.jpg"
+  },
+  {
+    title: "Cile",
+    description: "Stoccolma, la capitale, è una città moderna, anche se vi sono zone che conservano un'atmosfera paesana.",
+    image: "https://img.itinari.com/pages/images/original/0d3ed180-d22d-48e8-84df-19c4d888b41f-62-crop.jpg?ch=DPR&dpr=2.625&w=1600&s=7ebd4b5a9e045f41b4e0c7c75d298d6c"
+  },
+  {
+    title: "Argentina",
+    description: "Stoccolma, la capitale, è una città moderna, anche se vi sono zone che conservano un'atmosfera paesana.",
+    image: "https://static1.evcdn.net/images/reduction/1583177_w-1920_h-1080_q-70_m-crop.jpg"
+  },
+  {
+    title: "Colombia",
+    description: "Stoccolma, la capitale, è una città moderna, anche se vi sono zone che conservano un'atmosfera paesana.",
+    image: "https://cdn.sanity.io/images/24oxpx4s/prod/ed09eff0362396772ad50ec3bfb728d332eb1c30-3200x2125.jpg?w=1600&h=1063&fit=crop"
+  },
+]
 
-2 Organizzare html e css:
-  1 main-wrap che contenga tutto e sia una percentuale rispetto al totale del body
-  2 main wrap contiene un wrap-slider ed un wrap thumbs ed è position relative
-  3 wrap slider contiene tag img che occupa 100% e un div description. Il div description è position absolute top 100% right 0
-  4 thumbs slider width 100% contiene tutte le immagini generate, è position relative
-  5 bottoni sono position relative
-3 bottoni scorrimento ed interrompi con specifica classe
+/*
 
 Script
 1 Creare un array di 5 oggetti, dove ogni oggetto ha un titolo, descrizione ed url immagine
