@@ -1,11 +1,3 @@
-// **Consegna:**
-// Riprendiamo l’esercizio carosello e rifacciamolo, questa volta usando un array di oggetti.
-// Ogni elemento deve avere un titolo, una descrizione e il riferimento ad una immagine.
-// Le immagini devono essere 5 e nella grafica devono essere presenti:
-// - immagine in evidenza
-// - thumbnail di tutte le immagine con in evidenza l’immagine attiva
-// - bottone avanti e indietro
-// Lo screenshot allegato è solo dimostrativo ma cercate di mettere le thumb in basso e non laterlamente
 // **Bonus 1:**
 // Sperimentiamo attraverso l’uso delle timing functions anche una funzionalità di scorrimento al nostro carosello:al click di un bottone o già dall’inizio possiamo far partire, ad intervalli di tempo a piacere, lo scorrimento delle immagini disponibili nel carosello stesso.
 // ****
@@ -39,20 +31,7 @@ const sliderItems = [
     description: "Dalle cordigliere al deserto, dal Mar dei Caraibi fino all'Amazzonia, la Colombia è una destinazione eccitante che offre qualcosa per tutti i gusti",
     image: "https://cdn.sanity.io/images/24oxpx4s/prod/ed09eff0362396772ad50ec3bfb728d332eb1c30-3200x2125.jpg?w=1600&h=1063&fit=crop"
   },
-]
-
-/*
-
-Script
-1 Aggiungere evento al click bottone:
-  
-  Rimuove classe active dalla thumbnails corrente, prende stesso argomento delle funzioni remove
-  Chiama funzione printImage successiva
-  Aggiunge classe active alla thumbnails successiva, prende stesso argomento delle funzioni print
-
-  Funzione PrintImage prende come argomento l'indice dell'oggetto da stampare.
-  Su quell'oggetto e prende le informazioni
-*/
+];
 
 const wrapImage = document.querySelector(".wrap-slider");
 const wrapThumb = document.querySelector(".slider-thumbs");
@@ -61,13 +40,22 @@ const btnPrev = document.querySelector(".btn-slide.prev");
 let countIndex = 0;
 
 
-
-for (let item of sliderItems) {
-  const output = `<img class="thumb" src="${item.image}" alt="${item.title}">
-  `;
-  wrapThumb.innerHTML += output;
+let elImage;
+for (let i = 0; i < sliderItems.length; i++) {
+  printThumb(sliderItems[i], i);
 }
+
 const imageList = document.getElementsByClassName("thumb");
+
+function printThumb(item, index) {
+  elImage = document.createElement("img");
+  elImage.className = "thumb";
+  elImage.src = item.image;
+  elImage.alt = item.title;
+  elImage.idElement = index;
+  wrapThumb.append(elImage);
+  elImage.addEventListener("click", clickThumb);
+}
 
 printImage(sliderItems[countIndex]);
 addClass(imageList[countIndex]);
@@ -118,3 +106,10 @@ function addClass(item) {
   item.classList.add("active");
 }
 
+function clickThumb() {
+  const lastActive = document.getElementsByClassName("active");
+  console.log(lastActive.idElement);
+  // lastActive.classList.remove("active");
+  printImage(sliderItems[this.idElement]);
+  addClass(imageList[this.idElement]);
+}

@@ -29,11 +29,13 @@ main {
 }
 
 .reference {
+  width: 80%;
   position: absolute;
   top: 15px;
   right: 30px;
   text-align: end;
   color: white;
+  text-shadow: 2px 2px black;
 }
 
 .city {
