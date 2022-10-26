@@ -55,9 +55,19 @@ Script
 */
 
 const wrapImage = document.querySelector(".wrap-slider");
+const wrapThumb = document.querySelector(".slider-thumbs");
 const btnNext = document.querySelector(".btn-slide.next");
 const btnPrev = document.querySelector(".btn-slide.prev");
 let countIndex = 0;
+
+printImage(sliderItems[countIndex]);
+
+for (let item of sliderItems) {
+  const output = `<img src="${item.image}" alt="${item.title}">
+  `;
+  wrapThumb.innerHTML += output;
+}
+
 
 btnNext.addEventListener("click", function() {
   slider("next");
@@ -80,7 +90,6 @@ function printImage(item) {
   wrapImage.innerHTML = output;
 }
 
-printImage(sliderItems[countIndex]);
 function slider(direction) {
   if (direction === "next") {
     countIndex++;
@@ -95,3 +104,4 @@ function slider(direction) {
   }
   printImage(sliderItems[countIndex]);
 }
+
