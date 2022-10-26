@@ -44,7 +44,28 @@ const sliderItems = [
 /*
 
 Script
-1 Creare un array di 5 oggetti, dove ogni oggetto ha un titolo, descrizione ed url immagine
-Creare funzione printImage:
+1 Aggiungere evento al click bottone:
+  Chiama funzione removeImage corrente
+  Rimuove classe active dalla thumbnails corrente, prende stesso argomento delle funzioni remove
+  Chiama funzione printImage successiva
+  Aggiunge classe active alla thumbnails successiva, prende stesso argomento delle funzioni print
 
+  Funzione PrintImage prende come argomento l'indice dell'oggetto da stampare.
+  Su quell'oggetto e prende le informazioni
+*/
 
+printImage(sliderItems[0]);
+
+function printImage(item) {
+  const wrapImage = document.querySelector(".wrap-slider");
+  const output = `
+  <img src="${item.image}" alt="${item.title}">
+  <div class="reference">
+    <h2 class="city">${item.title}</h2>
+    <p class="description">
+      ${item.description}
+    </p>
+  </div>
+  `;
+  wrapImage.innerHTML = output;
+}
