@@ -60,14 +60,17 @@ const btnNext = document.querySelector(".btn-slide.next");
 const btnPrev = document.querySelector(".btn-slide.prev");
 let countIndex = 0;
 
-printImage(sliderItems[countIndex]);
+
 
 for (let item of sliderItems) {
-  const output = `<img src="${item.image}" alt="${item.title}">
+  const output = `<img class="thumb" src="${item.image}" alt="${item.title}">
   `;
   wrapThumb.innerHTML += output;
 }
+const imageList = document.getElementsByClassName("thumb");
 
+printImage(sliderItems[countIndex]);
+addClass(imageList[countIndex]);
 
 btnNext.addEventListener("click", function() {
   slider("next");
@@ -91,6 +94,7 @@ function printImage(item) {
 }
 
 function slider(direction) {
+  removeClass(imageList[countIndex]);
   if (direction === "next") {
     countIndex++;
     if (countIndex >= sliderItems.length) {
@@ -102,6 +106,15 @@ function slider(direction) {
       countIndex = (sliderItems.length - 1);
     }
   }
+  addClass(imageList[countIndex]);
   printImage(sliderItems[countIndex]);
+}
+
+function removeClass(item) {
+  item.classList.remove("active");
+}
+
+function addClass(item) {
+  item.classList.add("active");
 }
 

@@ -58,13 +58,13 @@ main {
   display: flex;
 }
 
-.wrap-thumbs img {
+.thumb {
   width: calc(100% / 5);
   object-fit: cover;
   filter: brightness(50%);
 }
 
-.wrap-thumbs img.active {
+.thumb.active {
   filter: brightness(100%);
   border: 3px solid lightgray;
 }
